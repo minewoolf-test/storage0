@@ -7,10 +7,33 @@ using namespace std;
 #include "files.h"
 #include "vectors.h"
 
-
+class item {
+public:
+	string name = "item";
+	int volume = 0;
+	int weight = 0;
+	void setRandom(int minVolume, int maxVolume, int minWeight, int maxWeight) {
+		volume = minVolume + rand() % (maxVolume - minVolume+1);
+		weight = minWeight + rand() % (maxWeight - minWeight+1);
+	};
+};
+void setItems(vector <item> itemList) {
+	string data = "";
+	for (int i = 0; i < itemList.size(); i++) {
+		data += itemList[i].name+ ","+to_string(itemList[i].volume) + "," + to_string(itemList[i].weight) + ",\n";
+	};
+	write("data.txt", data);
+};
 int main() {
 	//Константы
 	setlocale(LC_ALL, "ru");
+	vector <item> itemList = {};
+	for (int i = 0; i < 10; i++) {
+		item a;
+		a.setRandom(1, 1, 0, 10);
+		itemList.push_back(a);
+	};
+	setItems(itemList);
 	vector <string>	items = split(read("data.txt"),"\n");
 	vector <string>	names = {};
 	vector <int>volumes = {};
