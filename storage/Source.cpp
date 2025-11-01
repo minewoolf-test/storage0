@@ -10,10 +10,13 @@ using namespace std;
 class item {
 public:
 	string name = "item";
-	int volume = 0;
-	int weight = 0;
+	int volume = 1;
+	int weight = 1;
 	void setRandom(int minVolume, int maxVolume, int minWeight, int maxWeight) {
 		volume = minVolume + rand() % (maxVolume - minVolume+1);
+		if (volume == 0) { 
+			volume = 1; 
+		};
 		weight = minWeight + rand() % (maxWeight - minWeight+1);
 	};
 };
@@ -27,13 +30,13 @@ void setItems(vector <item> itemList) {
 int main() {
 	//Константы
 	setlocale(LC_ALL, "ru");
-	vector <item> itemList = {};
+	/*vector <item> itemList = {};
 	for (int i = 0; i < 10; i++) {
 		item a;
-		a.setRandom(1, 1, 0, 10);
+		a.setRandom(1, 1, -10, 10);
 		itemList.push_back(a);
 	};
-	setItems(itemList);
+	setItems(itemList);*/
 	vector <string>	items = split(read("data.txt"),"\n");
 	vector <string>	names = {};
 	vector <int>volumes = {};
